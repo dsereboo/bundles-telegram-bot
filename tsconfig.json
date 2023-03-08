@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "target":"ES2018",
+        "strict":true,
+        "module": "CommonJS",
+        "typeRoots": ["./types/globals.d.ts", "./node_modules/@types"],
+        "esModuleInterop": true,
+        "skipLibCheck": true
+    }
+}
