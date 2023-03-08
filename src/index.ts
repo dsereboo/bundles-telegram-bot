@@ -2,8 +2,10 @@ import * as dotenv from "dotenv";
 import { Telegraf } from "telegraf";
 import { message } from "telegraf/filters";
 import { BotCommand } from "telegraf/typings/core/types/typegram";
-import { AddItems, DivideItems, MultiplyItems, SubtractItems } from "../utils/Operations";
-
+import addCommand from "../commands/bot/add";
+import divideCommand from "../commands/bot/divide";
+import multiplyCommand from "../commands/bot/multiply";
+import subtractCommand from "../commands/bot/subtract";
 
 dotenv.config();
 
@@ -38,22 +40,20 @@ bot.start(async (ctx) => {
       botCommands = data;
     })
     .catch((err: Error) => {
-      //assert as arror
       console.log(err);
     });
-  //have a message template
+
   const unformattedCommands = botCommands.map((item) => {
     return `\n/${item.command}: ${item.description}`;
   });
 
   const formattedCommands = unformattedCommands.join("");
 
-  //insert into template
+
   const message = `PH_124_BOT helps you perform quick calculations on any two numbers.\n\nYou can control me using the following commands:\n${formattedCommands}
         `;
-  //return template
+
    ctx.reply(message);
-  //return message about commands with inline buttons
   
 });
 
@@ -66,10 +66,8 @@ bot.help(async (ctx) => {
       botCommands = data;
     })
     .catch((err: Error) => {
-      //assert as arror
       console.log(err);
     });
-  //have a message template
   const unformattedCommands = botCommands.map((item) => {
     return `\n/${item.command}: ${item.description}`;
   });
@@ -85,90 +83,10 @@ bot.help(async (ctx) => {
 
 
 
+bot.command("add", addCommand)
+bot.command("subtract", subtractCommand)
+bot.command("multiply",multiplyCommand)
+bot.command("divide", divideCommand)
 
-
-//Add
-bot.command("add", (ctx) => {
-  let input = ctx.message.text;
-
-  let inputArray = input.split(" ");
-
-  if (inputArray.length > 1){
-    const params = inputArray.slice(1)
-    const nums= params.map((str)=>{return parseInt(str)})
-
-    if(nums.includes(NaN)){
-        return ctx.reply('Invalid input! 😢 Please try again')
-    }
-    else{
-        const sum = nums.reduce(AddItems,0)
-        return ctx.reply(`Result is ${sum}`)
-    }
-  }
-  return ctx.reply(`result`);
-});
-
-//Subtract
-bot.command("subtract", (ctx)=>{
-    let input = ctx.message.text;
-
-    let inputArray = input.split(" ");
-  
-    if (inputArray.length > 1){
-      const params = inputArray.slice(1)
-      const nums= params.map((str)=>{return parseInt(str)})
-  
-      if(nums.includes(NaN)){
-          return ctx.reply('Invalid input! 😢 Please try again')
-      }
-      else{
-          const difference = nums.reduce(SubtractItems)
-          return ctx.reply(`Result is ${difference}`)
-      }
-    }
-    return ctx.reply(`result`);
-})
-
-//Multiply
-bot.command("multiply", (ctx)=>{
-    let input = ctx.message.text;
-
-    let inputArray = input.split(" ");
-  
-    if (inputArray.length > 1){
-      const params = inputArray.slice(1)
-      const nums= params.map((str)=>{return parseInt(str)})
-  
-      if(nums.includes(NaN)){
-          return ctx.reply('Invalid input! 😢 Please try again')
-      }
-      else{
-          const product = nums.reduce(MultiplyItems)
-          return ctx.reply(`Result is ${product}`)
-      }
-    }
-    return ctx.reply(`result`);
-})
-
-//Divide
-bot.command ("divide", (ctx)=>{
-    let input = ctx.message.text;
-
-    let inputArray = input.split(" ");
-  
-    if (inputArray.length > 1){
-      const params = inputArray.slice(1)
-      const nums= params.map((str)=>{return parseInt(str)})
-  
-      if(nums.includes(NaN)){
-          return ctx.reply('Invalid input! 😢 Please try again')
-      }
-      else{
-          const sum = nums.reduce(DivideItems)
-          return ctx.reply(`Result is ${sum}`)
-      }
-    }
-    return ctx.reply(`result`);
-})
 
 bot.launch();

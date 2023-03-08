@@ -12,5 +12,5 @@ export function MultiplyItems(accumulator:number, currentValue:number){
 }
 
 export function DivideItems (accumulator:number, currentValue:number){
-    return accumulator - currentValue
+    return accumulator/currentValue
 }
