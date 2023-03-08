@@ -3,12 +3,12 @@ import { StartContext } from "../globals/start";
 
 export default function addCommand (ctx:StartContext){
     let input = ctx.message.text;
-  
+  console.log(input, "input")
     let inputArray = input.split(" ");
   
     if (inputArray.length > 1){
-      const params = inputArray.slice(1)
-      const nums= params.map((str)=>{return parseInt(str)})
+    //   const params = inputArray.slice(1)
+      const nums= inputArray.map((str)=>{return parseInt(str)})
   
       if(nums.includes(NaN)){
           return ctx.reply('Invalid input! 😢 Please try again')
