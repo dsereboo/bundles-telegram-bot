@@ -6,26 +6,13 @@ import addCommand from "../commands/bot/add";
 import divideCommand from "../commands/bot/divide";
 import multiplyCommand from "../commands/bot/multiply";
 import subtractCommand from "../commands/bot/subtract";
-import help from "../commands/globals/help";
-import start from "../commands/globals/start";
+import help from "../commands/global/help";
+import start from "../commands/global/start";
 import { BotSession } from "../types/common";
 
 dotenv.config();
 
 const bot: Telegraf<BotSession> = new Telegraf(process.env.BOT_TOKEN as string);
-
-
-
-//Unknown commands
-// bot.on(message("text"), (ctx, next) => {
-//   const commandRegex =
-//     /^(?!(.*\/add)|(.*\/subtract)|(.*\/multiply)|(.*\/divide)|(.*\/start)|(.*\/help)).*$/;
-//   if (commandRegex.test(ctx.message.text)) {
-//     return ctx.reply("Sorry, can't understand your command.");
-//   } else {
-//     return next();
-//   }
-// });
 
 // Global Commands
 bot.start(start);
@@ -64,8 +51,31 @@ bot.on(message("text"), (ctx)=>{
             multiplyCommand(ctx)
             break;
         default: 
-           ctx.reply("Error occured. Restart bot")
+           ctx.reply("Invalid action ❗. Please try again")
     }
+    //Another operation
+    ctx.reply("What will be your next operation?", {
+        reply_markup: {
+          inline_keyboard: [
+              [
+                  { text: "Add", callback_data: "Add", },
+              ],
+              [
+                { text: "Subtract", callback_data:"Subtract"},
+              ],
+              [
+                { text: "Multiply", callback_data:"Multiply"},
+              ],
+              [
+                { text: "Divide", callback_data:"Divide"},
+              ]
+          ],
+        },
+      })
+      //Another operation(after a number of operations)
+    //Terminate session
+    //Reshow operations.
+    //auto trigger number keyboard when button is clicked???
 })
 
 
