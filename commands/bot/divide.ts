@@ -1,21 +1,13 @@
-import { DivideItems } from "../../utils/Operations";
-import { StartContext } from "../global/start";
+import { BotSession } from "../../types/common";
+import { DivideItems, parseNums } from "../../utils/Operations";
 
-export default function divideCommand (ctx:StartContext){
-    let input = ctx.message.text;
+export default function divideCommand(ctx: BotSession) {
+  let input = parseNums(ctx?.session?.firstNum, ctx?.session?.secondNum);
 
-    let inputArray = input.split(" ");
-  
-    if (inputArray.length > 1){
-      const nums= inputArray.map((str)=>{return parseInt(str)})
-  
-      if(nums.includes(NaN)){
-          return ctx.reply('Invalid input! 😢 Please try again')
-      }
-      else{
-          const sum = nums.reduce(DivideItems)
-          return ctx.reply(`Result is ${sum}`)
-      }
-    }
-    return ctx.reply(`result`);
+  if (input.includes(NaN)) {
+    ctx.reply("Invalid input! 😢 Please try again");
+  } else {
+    const quotient = input.reduce(DivideItems);
+    ctx.reply(`Result is ${quotient}`);
+  }
 }

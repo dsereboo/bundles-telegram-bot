@@ -13,27 +13,27 @@ export type StartContext = NarrowedContext<
 >;
 
 export default async function start (ctx:StartContext ){
-    ctx.reply(
-        `Hello ${ctx.update.message.from.first_name} 😃, PH_124 bot at your service.`
-      );
       ctx.reply(
-        "I can perform addition, subtraction and multiplacation on two numbers.\n\nChoose an operation: ",
+        `Hello ${ctx.update.message.from.first_name} 😃, PH_124 bot at your service.\n\nI can perform addition, subtraction and multiplication on two numbers.\n\nChoose an operation from the options below: `,
         {
+
           reply_markup: {
-            inline_keyboard: [
+            keyboard: [
                 [
-                    { text: "Add", callback_data: "Add", },
+                    { text: "Add",  },
                 ],
                 [
-                  { text: "Subtract", callback_data:"Subtract"},
+                  { text: "Subtract", },
                 ],
                 [
-                  { text: "Multiply", callback_data:"Multiply"},
+                  { text: "Multiply", },
                 ],
                 [
-                  { text: "Divide", callback_data:"Divide"},
+                  { text: "Divide",},
                 ]
             ],
+            resize_keyboard:true,
+            one_time_keyboard:true,
           },
         }
       );
