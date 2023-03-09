@@ -1,5 +1,5 @@
 import { MultiplyItems } from "../../utils/Operations";
-import { StartContext } from "../globals/start";
+import { StartContext } from "../global/start";
 
 export default function multiplyCommand (ctx:StartContext){
     let input = ctx.message.text;
@@ -7,8 +7,7 @@ export default function multiplyCommand (ctx:StartContext){
     let inputArray = input.split(" ");
   
     if (inputArray.length > 1){
-      const params = inputArray.slice(1)
-      const nums= params.map((str)=>{return parseInt(str)})
+      const nums= inputArray.map((str)=>{return parseInt(str)})
   
       if(nums.includes(NaN)){
           return ctx.reply('Invalid input! 😢 Please try again')

@@ -1,9 +1,9 @@
 import { AddItems } from "../../utils/Operations";
-import { StartContext } from "../globals/start";
+import { StartContext } from "../global/start";
 
 export default function addCommand (ctx:StartContext){
     let input = ctx.message.text;
-  console.log(input, "input")
+    
     let inputArray = input.split(" ");
   
     if (inputArray.length > 1){

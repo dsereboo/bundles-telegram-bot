@@ -17,7 +17,7 @@ export default async function start (ctx:StartContext ){
         `Hello ${ctx.update.message.from.first_name} 😃, PH_124 bot at your service.`
       );
       ctx.reply(
-        "I can perform addition, subtraction and multiplacation on two numbers.\nChoose an operation: ",
+        "I can perform addition, subtraction and multiplacation on two numbers.\n\nChoose an operation: ",
         {
           reply_markup: {
             inline_keyboard: [
