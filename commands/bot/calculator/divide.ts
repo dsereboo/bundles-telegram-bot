@@ -1,8 +1,8 @@
-import { BotSession } from "../../types/common";
-import { DivideItems, parseNums } from "../../utils/Operations";
+import { BotSession } from "../../../types/common";
+import { DivideItems } from "../../../utils/Operations";
 
 export default function divideCommand(ctx: BotSession) {
-  let input = parseNums(ctx?.session?.firstNum, ctx?.session?.secondNum);
+  let input = ctx.scene.session.numbers
 
   if (input.includes(NaN)) {
     ctx.reply("Invalid input! 😢 Please try again");

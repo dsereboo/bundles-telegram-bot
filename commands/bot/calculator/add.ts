@@ -1,9 +1,9 @@
-import { BotSession } from "../../types/common";
-import { AddItems, parseNums } from "../../utils/Operations";
-import { StartContext } from "../global/start";
+import { BotSession } from "../../../types/common";
+import { AddItems } from "../../../utils/Operations";
+
 
 export default function addCommand(ctx: BotSession) {
-  let input = parseNums(ctx?.session?.firstNum, ctx?.session?.secondNum);
+  let input = ctx.scene.session.numbers
 
   if (input.includes(NaN)) {
     return ctx.reply("Invalid input! 😢 Please try again");

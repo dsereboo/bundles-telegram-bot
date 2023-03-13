@@ -1,9 +1,8 @@
-import { BotSession } from "../../types/common";
-import { parseNums, SubtractItems } from "../../utils/Operations";
-import { StartContext } from "../global/start";
+import { BotSession } from "../../../types/common";
+import { SubtractItems } from "../../../utils/Operations";
 
 export default function subtractCommand (ctx:BotSession){
-    let input = parseNums(ctx?.session?.firstNum, ctx?.session?.secondNum);
+  let input = ctx.scene.session.numbers
 
     if (input.includes(NaN)) {
       return ctx.reply("Invalid input! 😢 Please try again");

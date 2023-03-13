@@ -19,18 +19,12 @@ export default async function start (ctx:StartContext ){
 
           reply_markup: {
             keyboard: [
-                [
-                    { text: "Add",  },
-                ],
-                [
-                  { text: "Subtract", },
-                ],
-                [
-                  { text: "Multiply", },
-                ],
-                [
-                  { text: "Divide",},
-                ]
+              [
+                { text: "CALCULATOR",  },
+            ],
+            [
+              { text: "BUY DATA", },
+            ],
             ],
             resize_keyboard:true,
             one_time_keyboard:true,
