@@ -12,9 +12,13 @@ const axiosClient = axios.create({
     },
   });
 
+//Generic post function
+export const postReq = async <T,S> (url:string, token:string, payload:T) => {
+    return axiosClient.post<S>(url, {...payload}, {headers:{Authorization:`Bearer ${token}`}})
+}
+  
 //API user login
 export const getToken = async () => {
-  // return await axiosClient.post<string>("/Auth/apiuserlogin", {username:process.env.BOTUSER, password:process.env.PASSWORD})
  let token = await axiosClient.post<string>("/Auth/apiuserlogin", {username:process.env.BOTUSER, password:process.env.PASSWORD})
   if(token.status === 200){
     return token.data
@@ -23,9 +27,7 @@ export const getToken = async () => {
   }
 }
 
-export const postReq = async <T,S> (url:string, token:string, payload:T) => {
-  return axiosClient.post<S>(url, {...payload}, {headers:{Authorization:`Bearer ${token}`}})
-}
+
 
 //Check existence
 // export const checkUserExistence = async (telegramUserId:string, token:string) => {
