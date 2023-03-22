@@ -1,5 +1,6 @@
 import { AxiosError } from "axios";
 import { BotSession, BundleRequest, Bundles } from "../../types/common";
+import { isBundlesArray } from "../../types/guards";
 import { createKeyboardStructure } from "../../utils/Formatting";
 import { getToken, postReq } from "../../utils/NetworkFunctions";
 import { welcome } from "../../utils/Operations";
@@ -12,6 +13,7 @@ export default async function dataOptions(ctx: BotSession) {
       await postReq<BundleRequest, Array<Bundles>>("/Bundles/bundleList", token, {bundleId:1})
       // await getBundlePackages(1,token)
       .then(async (res) => {
+      if(isBundlesArray(res.data)){
         if(res.data.length >= 1){
           const results = createKeyboardStructure(res.data);
           await ctx.reply("Select a bundle offer", {
@@ -23,6 +25,7 @@ export default async function dataOptions(ctx: BotSession) {
         else{
           await ctx.reply("❗Bundles not found.\nKindly retry again.")
           welcome(ctx)
+        }
         }
       })
       .catch((error) => {

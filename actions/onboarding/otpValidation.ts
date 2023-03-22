@@ -1,5 +1,6 @@
 import { AxiosError } from "axios";
 import { BotSession, Otp } from "../../types/common";
+import { isOtp } from "../../types/guards";
 import { startReply } from "../../utils/BotReplies";
 import { getToken, postReq } from "../../utils/NetworkFunctions";
 
@@ -11,7 +12,8 @@ export default async function otpValidation(ctx:BotSession){
         .then(async(res)=>{
             if(res.status === 200 && res.data){
                 //reply OTP verified
-                await ctx.reply("✅ OTP validated successfully. You can now access the bot")
+                //user activation
+                await ctx.reply("✅ OTP validated successfully.\n\nYou can now access the bot")
                 await ctx.scene.leave()
                 //route user to start menu
                 startReply(ctx)

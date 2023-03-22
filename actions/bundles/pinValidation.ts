@@ -7,7 +7,7 @@ import purchaseData from "./purchaseData";
 export default async function pinValidation(ctx: BotSession, userPin: number) {
   let token = await getToken()
   if(token !== "error"){
-    await postReq<PinRequest,Array<User>>("/Auth/validatePin", token, {userId:1, pin:userPin})
+    await postReq<PinRequest,boolean>("/Auth/validatePin", token, {userId:1, pin:userPin})
     .then(async (res) => {
       if (res.data) {
         const id = findBundleId(ctx.scene.session.action);

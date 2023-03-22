@@ -71,6 +71,12 @@ export interface Otp{
   otpSid:string;
 }
 
+export interface VerificationRequest{
+  pin:string; 
+  otpSid:string;
+  telegramUser:string;
+}
+
 export type HelpContext = NarrowedContext<
   Context<Update>,
   {

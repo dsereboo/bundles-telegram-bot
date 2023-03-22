@@ -1,7 +1,7 @@
 import { Composer } from "telegraf";
 import { message } from "telegraf/filters";
-import otpValidation from "../../../actions/bundles/otpValidation";
-import requestOtp from "../../../actions/bundles/requestOtp";
+import otpValidation from "../../../actions/onboarding/otpValidation";
+import requestOtp from "../../../actions/onboarding/requestOtp";
 import { BotSession, RegisterRequest } from "../../../types/common";
 import { getToken, postReq } from "../../../utils/NetworkFunctions";
 
@@ -104,8 +104,4 @@ verifyOtp.on(message("text"), async(ctx)=>{
   };
   //request to validate otp
   await otpValidation(ctx)
-
-  //if sucess return success message and route the user to start menu of bot
-  //if failure return to previous step and tell user to enter pin again
-  // ctx.reply("OTP validated")
 })

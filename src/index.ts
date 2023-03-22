@@ -89,10 +89,6 @@ stage.hears(["BUY DATA", "CALCULATOR", "🏠 HOME", "REGISTER"], async (ctx) => 
 stage.on(message("contact"), async (ctx) => {
       ctx.scene.enter("register")
   })
-// stage.action(["register"], async (ctx) => {
-//   console.log("here")
-//     ctx.scene.enter("register")
-// })
 
 // Global Commands
 bot.start(start);
@@ -106,17 +102,6 @@ bot.use((ctx,next)=>{
     winstonLogger.info('Bot Update',{...ctx.update, updateTpe:ctx.updateType})
     next()
 })
-
-//Listener
-// bot.hears(["BUY DATA", "CALCULATOR", "🏠 RETURN TO MAIN MENU"], async (ctx) => {
-//   if (ctx.message.text === "🏠 RETURN TO MAIN MENU") {
-//     await ctx.scene.leave();
-//     //start bot all over together
-//     start(ctx)
-//   } else {
-//     ctx.scene.enter(ctx?.message?.text.toLocaleLowerCase());
-//   }
-// });
 
 bot.action("register",async (ctx) => {
     ctx.answerCbQuery()

@@ -1,5 +1,6 @@
 import { AxiosError } from "axios";
 import { BotSession, Otp } from "../../types/common";
+import { isOtp } from "../../types/guards";
 import { getToken, postReq } from "../../utils/NetworkFunctions";
 
 export default async function  requestOtp (ctx:BotSession){
@@ -8,12 +9,14 @@ export default async function  requestOtp (ctx:BotSession){
         await postReq<{},Otp>("/Auth/getOtp", token, {})
         .then((res)=>{
             if(res.status === 200){
-              //set otpSid session
-              ctx.scene.session.otp = {
-                ...ctx.scene.session.otp,
-                otpSid: res.data.otpSid
-              };
-              ctx.reply(`Bundle bot OTP code is ${res.data.pin}\n\nEnter the OTP received\nOTP should be 6 digits`);
+                if( isOtp(res.data)){
+                    //set otpSid session
+                    ctx.scene.session.otp = {
+                        ...ctx.scene.session.otp,
+                        otpSid: res.data.otpSid
+                      };
+                    ctx.reply(`Bundle bot OTP code is ${res.data.pin}\n\nEnter the OTP received\nOTP should be 6 digits`);
+                }     
             }
         })
         .catch((err)=>{
