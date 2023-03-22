@@ -1,17 +1,23 @@
-import Context, { NarrowedContext, } from "telegraf/typings/context";
-import { Update, CallbackQuery } from "telegraf/typings/core/types/typegram";
+import Context, { NarrowedContext } from "telegraf/typings/context";
+import { Update, Message } from "telegraf/typings/core/types/typegram";
 import { SceneContextScene, WizardContextWizard, WizardSessionData } from "telegraf/typings/scenes";
 
 export interface BotSession extends Context {
     scene: SceneContextScene<BotSession, BotWizard>;
     wizard: WizardContextWizard<BotSession>;
-    // session: {action:string, firstNum:string, secondNum:string}
 }
 
 export interface BotWizard extends WizardSessionData {
     action:string;
     numbers:Array<number>;
     pinTries:number;
+    registrationDetails:RegisterRequest;
+    otp:Otp;
+    token:string;
+}
+
+export interface BundleRequest{
+  bundleId:number;
 }
 
 export interface Bundles {
@@ -19,6 +25,11 @@ export interface Bundles {
     unit:string;
     amount:number;
     bundlePackageId:number;
+}
+
+export interface PinRequest {
+  userId:number;
+  pin:number;
 }
 
 export interface User {
@@ -34,28 +45,47 @@ export interface PurchaseRequest {
 export interface PurchaseResponse {
     size:string;
     unit:string;
-    purchaseId:number;
+    transactionReference:string;
     purchaseDate:string;
 }
 
+export interface RegisterRequest {
+  telegramUserId:string;
+  phoneNumber: string;
+  pin:string;
+}
 
+export interface RegisterResponse{
+  
+}
 
-// export interface BotSession extends Context{
-//     wizard:WizardContextWizard<BotSession>
-// }
+export interface ExistenceRequest {
+  telegramUserId: string;
+}
+export interface CheckExistence {
+  existence:string;
+}
 
-// export type BotWizard = BotSession & {
-//     // scene: SceneContextScene<BotSession, WizardSessionData>;
-//     wizard: WizardContextWizard<BotSession>;
-// }
+export interface Otp{
+  pin:string; 
+  otpSid:string;
+}
 
-// export interface BotWizard extends BotSession {
-//     wizard: WizardContextWizard<BotSession>;
-// }
+export type HelpContext = NarrowedContext<
+  Context<Update>,
+  {
+    message: Update.New & Update.NonChannel & Message.TextMessage;
+    update_id: number;
+  }
+>
 
+export type StartContext = NarrowedContext<
+  Context<Update>,
+  {
+    message: Update.New & Update.NonChannel & Message.TextMessage;
+    update_id: number;
+  }
+>&BotSession
 
-
-// export interface BotWizard {
-//     scene: SceneContextScene<WizardSessionData>; 
-//     wizard: WizardContextWizard<BotSession>;
-// }
+export type UserKeyboard = Array<Array<{ text: string; callback_data: string }>>;
+export type UserButton = Array<{ text: string; callback_data: string }>;

@@ -14,6 +14,22 @@ export function nextOperationReply(ctx: BotSession) {
     },
   });
 }
+
+export async function welcome (ctx:BotSession){
+  ctx.reply("Welcome to Vodafone Offers.\nSelect an operation", {
+    reply_markup: {
+      inline_keyboard: [
+        [{ text: "Buy Data", callback_data: "buy", }],
+        [{ text: "Check Bundle", callback_data: "check" }],
+        [{ text: "Stop Auto-Renewal", callback_data: "gift" }],
+        [{ text: "Bundle For Someone", callback_data: "bundle" }],
+        [{ text: "SMS Packs", callback_data: "sms" }],
+        [{ text: "Check 4G Status", callback_data: "4G" }],
+      ],
+    },
+  });
+}
+
 export function parseNums(firstNum: string, secondNum: string) {
   let first = parseInt(firstNum);
   let second = parseInt(secondNum);
@@ -38,18 +54,22 @@ export function DivideItems(accumulator: number, currentValue: number) {
 
 export function findBundleId(purchaseType: string) {
   switch (purchaseType) {
-    case "purchase1":
+    case "bundleId1":
       return 1;
-    case "purchase2":
+    case "bundleId2":
       return 2;
-    case "purchase3":
+    case "bundleId3":
       return 3;
-    case "purchase4":
+    case "bundleId4":
       return 4;
-    case "purchase5":
+    case "bundleId5":
       return 5;
-    case "purchase6":
+    case "bundleId6":
       return 6;
+    case "bundleId7":
+      return 7;
+    case "bundleId8":
+      return 8;
     default:
       //item was not found
       return 0;
