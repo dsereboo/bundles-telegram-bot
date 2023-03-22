@@ -8,7 +8,7 @@ export default async function  requestOtp (ctx:BotSession){
         await postReq<{},Otp>("/Auth/getOtp", token, {})
         .then((res)=>{
             if(res.status === 200){
-              //set otp sid to something within session or state
+              //set otpSid session
               ctx.scene.session.otp = {
                 ...ctx.scene.session.otp,
                 otpSid: res.data.otpSid
@@ -22,5 +22,4 @@ export default async function  requestOtp (ctx:BotSession){
             }
         })
     }
-    //use generic request function
 }

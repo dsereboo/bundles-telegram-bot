@@ -76,8 +76,8 @@ stage.use((ctx,next)=>{
   next()
 })
 
-stage.hears(["BUY DATA", "CALCULATOR", "🏠 RETURN TO MAIN MENU", "REGISTER"], async (ctx) => {
-  if (ctx.message.text === "🏠 RETURN TO MAIN MENU") {
+stage.hears(["BUY DATA", "CALCULATOR", "🏠 HOME", "REGISTER"], async (ctx) => {
+  if (ctx.message.text === "🏠 HOME") {
     await ctx.scene.leave();
     //start bot all over together
     start(ctx)

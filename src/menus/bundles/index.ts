@@ -57,7 +57,7 @@ validatePin.action(
     ctx.scene.session.action = ctx.match?.[0];
     await ctx.reply("Enter your pin", {
       reply_markup: {
-        keyboard: [[{ text: "🏠 RETURN TO MAIN MENU" }], [{ text: "BUY DATA" }]],
+        keyboard: [[{ text: "🏠 HOME" }], [{ text: "BUY DATA" }]],
         resize_keyboard: true,
         one_time_keyboard: true,
       },
@@ -69,13 +69,12 @@ validatePin.action(
 //Buy data step 4
 export const buySelectedBundle = new Composer<BotSession>();
 
-buySelectedBundle.hears("🏠 RETURN TO MAIN MENU", async(ctx)=>{
+buySelectedBundle.hears("🏠 HOME", async(ctx)=>{
   await ctx.scene.leave()
   start(ctx)
 })
 
 buySelectedBundle.on(message("text"), async (ctx) => {
-  //check sce
   let num = parseInt(ctx.message.text);
   ++ctx.scene.session.pinTries;
   if (Number.isNaN(num)) {
@@ -100,7 +99,7 @@ buySelectedBundle.on(message("text"), async (ctx) => {
         {
           reply_markup: {
             keyboard: [
-              [{ text: "🏠 RETURN TO MAIN MENU" }],
+              [{ text: "🏠 HOME" }],
             ],
             resize_keyboard: true,
             one_time_keyboard: true,

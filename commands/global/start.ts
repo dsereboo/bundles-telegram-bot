@@ -7,8 +7,8 @@ export default async function start (ctx:StartContext ){
   
   let token = await getToken()
   if(token !== "success"){
-    // postReq<ExistenceRequest, CheckExistence>("/Auth/checkuser", token, {telegramUserId:ctx.update.message.from.id.toString() } )
-    postReq<ExistenceRequest, CheckExistence>("/Auth/checkuser", token, {telegramUserId:"4342222242"} )
+    postReq<ExistenceRequest, CheckExistence>("/Auth/checkuser", token, {telegramUserId:ctx.update.message.from.id.toString() } )
+    // postReq<ExistenceRequest, CheckExistence>("/Auth/checkuser", token, {telegramUserId:"4342222242"} )
     .then(
       (res)=>{
         if(res.data.existence){

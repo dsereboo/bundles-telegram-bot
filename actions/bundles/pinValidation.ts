@@ -14,7 +14,7 @@ export default async function pinValidation(ctx: BotSession, userPin: number) {
         //Validate chosen bundle exists exits
         if (id !== undefined && id > 0) {        
           await purchaseData(ctx, id);
-          // ctx.scene.leave()
+          ctx.scene.leave()
         } else {
           ctx.reply(
             "❗Your data purchase cannot be processed.\n\nKindly try again"
@@ -35,7 +35,7 @@ export default async function pinValidation(ctx: BotSession, userPin: number) {
             reply_markup: {
               keyboard: [
                 [
-                  { text: "🏠 RETURN TO MAIN MENU",  },
+                  { text: "🏠 HOME",  },
               ],
               [
                 { text: "BUY DATA", },

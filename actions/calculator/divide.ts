@@ -12,7 +12,7 @@ export default async function divideCommand(ctx: BotSession) {
       reply_markup: {
         keyboard: [
           [
-            { text: "🏠 RETURN TO MAIN MENU",  },
+            { text: "🏠 HOME",  },
         ],
         [
           { text: "CALCULATOR", },

@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { BotSession, PurchaseRequest } from "../../types/common";
-import { beautifyTransactionRef, makeTitle } from "../../utils/Formatting";
+import { makeTitle } from "../../utils/Formatting";
 import { getToken, postReq } from "../../utils/NetworkFunctions";
 import * as base64 from "base64topdf"
 import { Input } from "telegraf";

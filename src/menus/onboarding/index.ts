@@ -2,9 +2,7 @@ import { Composer } from "telegraf";
 import { message } from "telegraf/filters";
 import otpValidation from "../../../actions/bundles/otpValidation";
 import requestOtp from "../../../actions/bundles/requestOtp";
-import start from "../../../commands/global/start";
 import { BotSession, RegisterRequest } from "../../../types/common";
-import { startReply } from "../../../utils/BotReplies";
 import { getToken, postReq } from "../../../utils/NetworkFunctions";
 
 //get user phone number
@@ -84,7 +82,7 @@ confirmDetails.action("startRegistration", async(ctx)=>{
         .then(async(res)=>{
           //TO-DO: Validate response status
             ctx.answerCbQuery()
-             await ctx.reply("You have successfully been registered\nYou will receive an OTP code shortly")
+             await ctx.reply("✅ You have successfully been registered\nYou will receive an OTP code shortly")
              //make request for otp value
              await requestOtp(ctx)
              ctx.wizard.next()

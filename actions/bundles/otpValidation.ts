@@ -10,9 +10,8 @@ export default async function otpValidation(ctx:BotSession){
         await postReq<Otp,boolean>("/Auth/verifyotp", token, {...ctx.scene.session.otp})
         .then(async(res)=>{
             if(res.status === 200 && res.data){
-                console.log(res.data)
                 //reply OTP verified
-                await ctx.reply("OTP validated successfully. You can now access the bot")
+                await ctx.reply("✅ OTP validated successfully. You can now access the bot")
                 await ctx.scene.leave()
                 //route user to start menu
                 startReply(ctx)
@@ -30,9 +29,4 @@ export default async function otpValidation(ctx:BotSession){
             }
         })
     }
-    //make request to validate otp
-    
-    //if sucess send user to main screen
-    //if user enters wrong otp try again
-    //if otp value is wrong try again
 }
