@@ -1,6 +1,7 @@
 //Packages
 import * as dotenv from "dotenv";
 import { Telegraf, Scenes, session } from "telegraf";
+import { limit } from "@grammyjs/ratelimiter";
 import { message } from "telegraf/filters";
 
 //Utils
@@ -96,6 +97,19 @@ bot.help(help);
 
 //middleware
 bot.use(session());
+// bot.use((ctx,next)=>{
+//   next()
+// })
+bot.use(limit({
+  //Timeframe for messages
+  timeFrame: 2000,
+  //No of messages for above timeframe
+  limit: 3,
+
+  onLimitExceeded: async(ctx) => {
+    await ctx.reply("Please refrain from spamming the bot.")
+  }
+}));
 bot.use(stage.middleware());
 bot.use((ctx,next)=>{
     // logger.info(ctx.update)

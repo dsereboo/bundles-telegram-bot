@@ -30,7 +30,6 @@ startCalcWizard.on(message("text"), async (ctx) => {
 //Calculator Step 2
 export const firstInputPrompt = new Composer<BotSession>();
 firstInputPrompt.on(message("text"), async (ctx) => {
-  console.log(ctx.scene.session.action)
   ctx.scene.session.action = ctx?.message?.text;
   ctx.reply("Enter the first number\ne.g. 23");
   return ctx.wizard.next();
@@ -39,7 +38,6 @@ firstInputPrompt.on(message("text"), async (ctx) => {
 //Calculator Step 3
 export const secondInputPrompt = new Composer<BotSession>();
 secondInputPrompt.on(message("text"), async (ctx) => {
- 
   let number = parseInt(ctx?.message?.text);
   if(Number.isNaN(number)){
     ctx.reply("❗Invalid input. Your input should be a number.\ne.g 23.\n\nEnter first number again");

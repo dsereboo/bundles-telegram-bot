@@ -1,18 +1,18 @@
 // import { AxiosError } from "axios";
-import { BotSession, CheckExistence, ExistenceRequest, StartContext } from "../../types/common";
+import { AxiosError } from "axios";
+import { BotSession, UserExistence, ExistenceRequest, StartContext } from "../../types/common";
 import { startReply } from "../../utils/BotReplies";
 import { getToken, postReq } from "../../utils/NetworkFunctions";
 
 export default async function start (ctx:StartContext ){
-  
+  // ctx.user={phoneNumber:"", userId:""}
   let token = await getToken()
   if(token !== "success"){
-    // postReq<ExistenceRequest, CheckExistence>("/Auth/checkuser", token, {telegramUserId:ctx.update.message.from.id.toString() } )
-    postReq<ExistenceRequest, CheckExistence>("/Auth/checkuser", token, {telegramUserId:"43424325452"} )
+    postReq<ExistenceRequest, UserExistence>("/Auth/checkuser", token, {telegramUserId:ctx.update.message.from.id.toString() } )
+    // postReq<ExistenceRequest, UserExistence>("/Auth/checkuser", token, {telegramUserId:"4342785452"} )
     .then(
       (res)=>{
         if(res.data.existence){
-         //start user bot flow like normal
          startReply(ctx)
         }
         else{
@@ -32,11 +32,27 @@ export default async function start (ctx:StartContext ){
       }
     )
     .catch((err)=>{
-       console.log(err)
+      if(err instanceof AxiosError){
+        if(err.response?.status === 404){
+            //start registration process
+         ctx.reply(`Hello 😃,\nYou are not a registered to use this service.\nTo register for this service click the button below.`,
+         {
+           reply_markup:{
+                 keyboard:[
+               [{text:"REGISTER", request_contact:true}]
+             ],
+             resize_keyboard:true,
+             one_time_keyboard:true,
+           }
+         }
+         )
+        }
+      }
+      //  console.log(err, "toplevel")
     })
   }
    else{
-     ///Throw an error to te user
+     ///Throw an error to the user
      console.log("error generating token")
    }
   }

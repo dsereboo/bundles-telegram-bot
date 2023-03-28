@@ -11,7 +11,6 @@ export default async function otpValidation(ctx:BotSession){
         await postReq<Otp,boolean>("/Auth/verifyotp", token, {...ctx.scene.session.otp})
         .then(async(res)=>{
             if(res.status === 200 && res.data){
-                //reply OTP verified
                 //user activation
                 await ctx.reply("✅ OTP validated successfully.\n\nYou can now access the bot")
                 await ctx.scene.leave()

@@ -5,6 +5,7 @@ import { SceneContextScene, WizardContextWizard, WizardSessionData } from "teleg
 export interface BotSession extends Context {
     scene: SceneContextScene<BotSession, BotWizard>;
     wizard: WizardContextWizard<BotSession>;
+    user: UserExistence;
 }
 
 export interface BotWizard extends WizardSessionData {
@@ -14,6 +15,14 @@ export interface BotWizard extends WizardSessionData {
     registrationDetails:RegisterRequest;
     otp:Otp;
     token:string;
+    user: UserExistence;
+    pinIds:PinId;
+
+}
+
+export interface PinId {
+  pinOneId: number;
+  pinTwoId:number;
 }
 
 export interface BundleRequest{
@@ -62,8 +71,8 @@ export interface RegisterResponse{
 export interface ExistenceRequest {
   telegramUserId: string;
 }
-export interface CheckExistence {
-  existence:string;
+export interface UserExistence {
+  existence: boolean;
 }
 
 export interface Otp{
@@ -75,6 +84,11 @@ export interface VerificationRequest{
   pin:string; 
   otpSid:string;
   telegramUser:string;
+}
+
+export interface ApiUser {
+  username:string;
+  password:string;
 }
 
 export type HelpContext = NarrowedContext<

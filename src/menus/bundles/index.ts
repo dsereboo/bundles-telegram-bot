@@ -49,7 +49,7 @@ validatePin.action(
     "bundleId5",
     "bundleId6",
     "bundleId7",
-    "bundleId8"
+    "bundleId8",
   ],
   async (ctx) => {
     ctx.answerCbQuery();
@@ -69,10 +69,10 @@ validatePin.action(
 //Buy data step 4
 export const buySelectedBundle = new Composer<BotSession>();
 
-buySelectedBundle.hears("🏠 HOME", async(ctx)=>{
-  await ctx.scene.leave()
-  start(ctx)
-})
+buySelectedBundle.hears("🏠 HOME", async (ctx) => {
+  await ctx.scene.leave();
+  start(ctx);
+});
 
 buySelectedBundle.on(message("text"), async (ctx) => {
   let num = parseInt(ctx.message.text);
@@ -82,7 +82,7 @@ buySelectedBundle.on(message("text"), async (ctx) => {
       ctx.reply(
         "🚫 You have exhausted the number of tries.\nKindly contact your service provider"
       );
-      await suspendUser(4,"");
+      await suspendUser(4, "");
     } else {
       await ctx.reply(
         "❗Invalid pin.\nYour pin should be a four digit number\ne.g 1809\n\nEnter your pin again"
@@ -98,26 +98,21 @@ buySelectedBundle.on(message("text"), async (ctx) => {
         "🚫 You have exhausted the number of tries.\nKindly contact your service provider",
         {
           reply_markup: {
-            keyboard: [
-              [{ text: "🏠 HOME" }],
-            ],
+            keyboard: [[{ text: "🏠 HOME" }]],
             resize_keyboard: true,
             one_time_keyboard: true,
           },
         }
       );
       //default user to suspend is user with user ID 3
-      await suspendUser(3,"");
+      await suspendUser(3, "");
       ctx.scene.leave();
-    } else {    
+    } else {
       await pinValidation(ctx, num);
       if (ctx.message && ctx.message.message_id) {
-        await ctx.deleteMessage()
+        await ctx.deleteMessage();
       }
-     
       // return ctx.scene.reenter()
     }
   }
 });
-
-

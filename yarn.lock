@@ -23,6 +23,11 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
+"@grammyjs/ratelimiter@^1.1.6":
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/@grammyjs/ratelimiter/-/ratelimiter-1.1.6.tgz#06c3b5f3460d78f5f6618fafdd065e74dc01bed8"
+  integrity sha512-mqBWTdw9YwbQOhT1st3Car1MqoubafHLWYSb9/5UQUCc9EVqih7JmoBiyXB+vBvI3BMgDU5xoWh2gpeCXxURzw==
+
 "@jridgewell/resolve-uri@^3.0.3":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@jridgewell/resolve-uri/-/resolve-uri-3.1.0.tgz#2203b118c157721addfe69d47b70465463066d78"

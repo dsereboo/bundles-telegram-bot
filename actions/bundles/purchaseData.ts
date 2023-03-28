@@ -23,6 +23,7 @@ export default async function purchaseData(ctx: BotSession, id: number) {
       let title = makeTitle(6)
       base64.base64Decode(res.data, `./transactions/${"bot"+title}.pdf`)
       const file = Input.fromLocalFile(`C:/Users/PCES/Desktop/WorkProjects/PH125/bundle-and-calculator-bot/transactions/${"bot"+title}.pdf`)
+      await ctx.reply('✅ Your have successfully purchased data\n\nYou will receive an invoice shortly.')
       ctx.replyWithDocument(file)
        //cleaup after reply is sent
     })

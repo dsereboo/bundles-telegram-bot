@@ -1,6 +1,6 @@
 //Library
 import axios from "axios";
-// import { Bundles, CheckExistence, PurchaseRequest, PurchaseResponse, RegisterRequest, User } from "../types/common";
+import { ApiUser } from "../types/common";
 
 const axiosClient = axios.create({
     // baseURL: process.env.API_URL,
@@ -13,10 +13,14 @@ const axiosClient = axios.create({
   });
 
 //Generic post function
-export const postReq = async <T,S> (url:string, token:string, payload:T) => {
-    return axiosClient.post<S>(url, {...payload}, {headers:{Authorization:`Bearer ${token}`}})
-}
-  
+export const postReq = async <T, S>(url: string, token: string, payload: T) => {
+  return axiosClient.post<S>(
+    url,
+    { ...payload },
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+};
+
 //API user login
 export const getToken = async () => {
  let token = await axiosClient.post<string>("/Auth/apiuserlogin", {username:process.env.BOTUSER, password:process.env.PASSWORD})

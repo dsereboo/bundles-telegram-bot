@@ -12,7 +12,8 @@ export default async function pinValidation(ctx: BotSession, userPin: number) {
       if (res.data) {
         const id = findBundleId(ctx.scene.session.action);
         //Validate chosen bundle exists exits
-        if (id !== undefined && id > 0) {        
+        if (id !== undefined && id > 0) { 
+          //check user status       
           await purchaseData(ctx, id);
           ctx.scene.leave()
         } else {

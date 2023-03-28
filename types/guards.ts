@@ -11,7 +11,6 @@ export function isOtp(otp:any):otp is Otp{
     )
 }
 
-
 export function isBundle(bundle:any): bundle is Bundles{{
         return (
             bundle &&
